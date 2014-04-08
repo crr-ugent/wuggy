@@ -1,9 +1,9 @@
 Name = "Wuggy"
-Version = "0.3.0e"
+Version = "0.3.0f"
 Copyright = "2009-2014 emmanuel.keuleers@ugent.be"
 Build = ""
 Description = """
-Wuggy is a multilingual pseudoword generator.By using some smart tricks, Wuggy
+Wuggy is a multilingual pseudoword generator. By using some smart tricks, Wuggy
 can very quickly find the pseudoword best matching a given word . In fact, the
 harder the restrictions you give Wuggy, the faster it will find the solution."""
 WebSite = ("http://crr.ugent.be/Wuggy", "Wuggy home page")
