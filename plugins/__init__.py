@@ -1,0 +1,15 @@
+import orthographic_english
+import orthographic_dutch
+import orthographic_french
+import phonetic_french
+import orthographic_german
+import orthographic_serbian_latin
+import orthographic_serbian_cyrillic
+import orthographic_spanish
+import orthographic_basque
+import orthographic_vietnamese
+import phonetic_italian
+import phonetic_english_celex
+import phonetic_english_cmu
+import orthographic_italian
+import orthographic_polish

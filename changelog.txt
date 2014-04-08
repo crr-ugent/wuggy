@@ -1,0 +1,88 @@
+Version 0.3
+------------
+Lots of new stuff!!!!
+
+Version 0.2.2b2
+----------------
+Added a second phonetic English module, based on CMU and input from Ben Tucker.
+
+Version 0.2.1b2
+----------------
+Changed wording from "syllables" to "segments" in appropriate places in the interface.
+Added syllables and segments output options.
+Added a phonetic English module, based on CELEX and input from Ben Tucker.
+
+Version 0.2.1b1
+----------------
+The Dutch language module now defines 'eu' as a syllable nucleus. No idea why that was still missing.
+Added a phonetic Italian module, based on input from Alexandra Kratschmer and data from Jeremy Goslin. 
+Changed naming system for datafiles and plugins.
+
+Version 0.2.0b3
+----------------
+Fixed a critical typo in the Dutch language module that caused a single letter 'u' not to be seen as a syllable nucleus.
+
+Version 0.2.0b2
+--------------
+-Updated the English orthography module so that 'y' is no longer recognized as the nucleus of a syllable if it is followed by a vowel (thanks to Eva Marinus for pointing this out)
+
+Version 0.2.0b (testing many changes)
+--------------
+-Beta version making Wuggy compatible with OS X Lion
+-Upgraded to WxPython 2.9.2 and Python 2.7
+-Made some changes in cSheet to accomodate WxPython2.9
+-Wuggy should now be a Cocoa 64 bit application
+-Generator can now handle onc format instead of syllabic format, making onc splitting independent of the plugin module for that language 
+-Generator can now use hidden representations. This make options such as finding pseudohomophones possible. Details coming in later version of Wuggy.
+
+Version 0.1.9
+-------------
+-The German module is now selectable again
+
+Version 0.1.8
+-------------
+-Changed input capacity to 100.000 lines
+-Solved a bug in Linux version
+
+Version 0.1.7
+-------------
+Added Vietnamese module (thanks to Hien Pham)
+Words can now be input with spaces. Spaces will simply be disregarded for further processing.
+Added a French phonology module (thanks to Boris New).
+
+Version 0.1.6 (no public release)
+--------------
+Solved some problems with German module
+
+Version 0.1.5
+--------------
+Added German module
+
+Version 0.1.4
+--------------
+- Fixed error where non-ascii characters would mess-up copy/paste behavior
+- Output option "Maximal Transition frequency deviation" is now "Deviation Statistics"
+- Deviation Statistics now also ouputs summed_deviation
+- Maxdeviation_transition is now given in the more intuitive square brackets format.
+
+Version 0.1.3
+-------------
+- Downgraded to python 2.5 on Windows. Bundling the application with python 2.6 was
+giving some Windows users problems with certain DLL's. Let's hope this solves
+the problem.
+
+Version 0.1.2
+-------------
+- Syllables are automatically added for blank fields when Generator>Run is chosen.
+- Wuggy now outputs plain strings by default (output options>syllables is unchecked)
+- Better and more informative progress dialogs while loading language modules
+- Added about box
+- Segmentation modules are correctly loaded! This should give better results
+- Added a Serbian Cyrillic module
+- Maxdeviation_transition now marks the correct transition
+- Added Keyboard Shortcuts
+- Rudimentary and experimental copy-paste implementation
+
+Version 0.1.1
+-------------
+- First Release
