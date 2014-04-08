@@ -12,18 +12,18 @@ if sys.platform in ['win32','cygwin','win64']:
     freezer_module="py2exe"
     freezer_options= {'argv_emulation': False,
                       'windows':['Wuggy.py']}
-    ICON="icons/wug.ico"
+    # ICON="./icons/wug.ico"
 
     
 elif sys.platform == 'darwin':
     freezer_module="py2app"
     freezer_options= {'argv_emulation': False,
-                      'iconfile': '/Users/emmanuel/source/Wuggy/icons/wug.icns',
+                      'iconfile': 'icons/wug.icns',
                       'plist': {"CFBundleShortVersionString": info.Version,
                       "CFBundleVersion": info.Build,
                       "NSHumanReadableCopyright": info.Copyright,
                       "Bundle identifier":  info.Identifier}}
-    ICON="icons/wug.icns"
+    # ICON="./icons/wug.icns"
 
 lexica=['orthographic_basque.txt', 'orthographic_dutch.txt', 
         'orthographic_english.txt', 'orthographic_french.txt', 
@@ -52,14 +52,11 @@ phon_plugins_paths=['plugins/phon/'+ phon_plugin for phon_plugin in phon_plugins
 Wuggy_executable = bdist_esky.Executable(
     gui_only = True,
     description = "A multilingual pseudoword generator",
-    script = "Wuggy.py",
-    icon=ICON)
+    script = "Wuggy.py")
 
 setup(name=info.Name,
       version=info.Version,
       scripts=[Wuggy_executable],
-      dist="C:\dist",
-      # packages=find_packages(exclude=['plugins', 'plugins.*']),
       packages=find_packages(),
       data_files=[('data', lexica_paths),
                   ('plugins', plugins_paths),

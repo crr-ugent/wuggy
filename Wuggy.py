@@ -15,7 +15,7 @@ import config
 
 class App(wx.App, SoftwareUpdate):
     def OnInit(self):
-        # # Parse command line arguments
+        # Parse command line arguments
         parser = argparse.ArgumentParser(description='Wuggy - A Multilingual Pseudoword Generator')
         parser.add_argument('--data', help='specify a non-default data directory')
         parser.add_argument('--plugin', help='specify a non-default plugin directory')
