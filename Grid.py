@@ -146,7 +146,7 @@ class InputGrid(Grid):
         array=self.MakeArray()
         warnings=[]
         for rownum, (word, segments, expression) in enumerate(array):
-            word=word.replace(u' ','')  # remove spaces
+            word=word.replace(u' ',u'')  # remove spaces
             if segments==u"" or replace==True:
                 segments=generator.lookup(word)
                 segments=u"" if segments==None else segments

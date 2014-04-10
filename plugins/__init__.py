@@ -13,3 +13,4 @@ import phonetic_english_celex
 import phonetic_english_cmu
 import orthographic_italian
 import orthographic_polish
+import orthographic_turkish
