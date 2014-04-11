@@ -2,9 +2,6 @@ from fractions import Fraction
 from collections import *
 import sys
 
-if sys.version_info[0]<3 and sys.version_info[1]<6:
-    from namedtuple import *
-
 Sequence=namedtuple('Sequence',['representation','frequency'])
 
 # decorators

@@ -1,6 +1,16 @@
-Version 0.3
-------------
-Lots of new stuff!!!!
+Version 0.3.2 (Development version)
+------------------------------------
+- Updated Italian word list 
+- Started to test Start-Peak-End alignment (Keuleers & Daelemans, 2007) as a solution to 
+illegal sequences occuring over syllable boundaries when there are two adjacent empty segments.
+
+Version 0.3.1 (Development version)
+------------------------------------
+- Added automatic updating mechanism  
+- Added Polish module contributed by Paweł Mandera
+- New packaging pipeline for Windows
+- Added Italian wodule with help from Davide Crepaldi
+- Added Turkish module contributed by Begum Erten
 
 Version 0.2.2b2
 ----------------

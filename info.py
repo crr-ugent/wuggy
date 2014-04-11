@@ -1,5 +1,5 @@
 Name = "Wuggy"
-Version = "0.3.1"
+Version = "0.3.2"
 Copyright = "2009-2014 emmanuel.keuleers@ugent.be"
 Build = ""
 Description = """

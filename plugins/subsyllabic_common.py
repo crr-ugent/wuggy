@@ -8,7 +8,7 @@ sys.path.append(os.pardir)
 
 import Levenshtein
 
-from segment import *
+from segment import onsetnucleuscoda, startpeakend, SegmentationError
 
 from base_plugin import *
 
@@ -30,7 +30,23 @@ def pre_transform(input_sequence, frequency=1, language=None):
         except SegmentationError:
             segments=(syllable,'','')
         for segment in segments:
-            representation.append((Segment(len(syllables),len(segment),segment)))
+            representation.append((Segment(len(syllables), 
+            len(segment), segment)))
+    representation.insert(0,(Segment(len(syllables),1,'^')))
+    representation.append((Segment(len(syllables),1,'$')))
+    return Sequence(tuple(representation),frequency)
+
+def pre_transform_spe(input_sequence, frequency=1, language=None):
+    syllables=input_sequence.split('-')
+    representation=[]
+    for syllable in syllables:
+        try:
+            segments=startpeakend(syllable, language)
+        except SegmentationError:
+            segments=(syllable,'','')
+        for segment in segments:
+            representation.append((Segment(len(syllables), 
+            len(segment), segment)))
     representation.insert(0,(Segment(len(syllables),1,'^')))
     representation.append((Segment(len(syllables),1,'$')))
     return Sequence(tuple(representation),frequency)
@@ -74,6 +90,17 @@ def output_syllabic(sequence):
     
 def output_segmental(sequence):
     return u':'.join([segment.letters for segment in sequence[1:-1]])
+
+def output_plain_spe(sequence):
+    return u''.join([segment.letters for segment in sequence[1:-1]])
+
+def output_syllabic_spe(sequence):
+    # adjust for start-peak-end alignment here
+    return '-'.join(u''.join(segment.letters for segment in sequence[i-3:i]) for i in range(4,len(sequence),3))
+    
+def output_segmental_spe(sequence):
+    return u':'.join([segment.letters for segment in sequence[1:-1]])
+
 
 # statistics
 def statistic_overlap(generator, generated_sequence):
