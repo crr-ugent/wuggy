@@ -25,16 +25,16 @@ class App(wx.App, SoftwareUpdate):
             config.cl_data_path=vars(clargs)['data']
         except:
             "Exception parsing command line arguments"
-        # Check for Updates
-        BASEURL = "http://crr.ugent.be"
-        self.InitUpdates(updatesURL=BASEURL+"/Wuggy/downloads/", 
-                         changelogURL=BASEURL+"/Wuggy/changelog.txt")
-        self.SetAppDisplayName('Wuggy')
+        self.SetAppDisplayName("Wuggy")
         # Initialize the application
         # wx.InitAllImageHandlers()
         mainwindow = MainWindow(None, -1, "")
         self.SetTopWindow(mainwindow)
         mainwindow.Show()
+        # Check for Updates
+        BASEURL = "http://crr.ugent.be"
+        self.InitUpdates(updatesURL=BASEURL+"/Wuggy/downloads/", 
+                         changelogURL=BASEURL+"/Wuggy/changelog.txt")
         self.CheckForUpdate()
         return 1
 

@@ -6,5 +6,7 @@ default_word_lexicon='orthographic_basque.txt'
 default_lookup_lexicon='orthographic_basque.txt'
 from subsyllabic_common import *
 import orth.es as language
+import segment
+segment_function=segment.start_peak_end
 def transform(input_sequence, frequency=1):
     return pre_transform(input_sequence, frequency=frequency, language=language)

@@ -3,12 +3,13 @@ from collections import *
 from fractions import Fraction
 import os
 import sys
+import re
 
 sys.path.append(os.pardir)
 
 import Levenshtein
 
-from segment import onsetnucleuscoda, startpeakend, SegmentationError
+from segment import onset_nucleus_coda, start_peak_end, SegmentationError
 
 from base_plugin import *
 
@@ -21,32 +22,18 @@ language=None
 Segment=namedtuple('Segment', ('sequence_length', 'segment_length', 'letters'))
 SegmentH=namedtuple('Segment', ('sequence_length', 'segment_length', 'letters','hidden'))
 
-def pre_transform(input_sequence, frequency=1, language=None):
+def pre_transform(input_sequence, segment_function=onset_nucleus_coda, frequency=1, language=None):
     syllables=input_sequence.split('-')
     representation=[]
     for syllable in syllables:
         try:
-            segments=onsetnucleuscoda(syllable, language)
+            segments=segment_function(syllable, language)
         except SegmentationError:
             segments=(syllable,'','')
         for segment in segments:
+            segment_length=0 if re.match(u"^[><].+",segment) else len(segment)
             representation.append((Segment(len(syllables), 
-            len(segment), segment)))
-    representation.insert(0,(Segment(len(syllables),1,'^')))
-    representation.append((Segment(len(syllables),1,'$')))
-    return Sequence(tuple(representation),frequency)
-
-def pre_transform_spe(input_sequence, frequency=1, language=None):
-    syllables=input_sequence.split('-')
-    representation=[]
-    for syllable in syllables:
-        try:
-            segments=startpeakend(syllable, language)
-        except SegmentationError:
-            segments=(syllable,'','')
-        for segment in segments:
-            representation.append((Segment(len(syllables), 
-            len(segment), segment)))
+            segment_length, segment)))
     representation.insert(0,(Segment(len(syllables),1,'^')))
     representation.append((Segment(len(syllables),1,'$')))
     return Sequence(tuple(representation),frequency)
@@ -78,29 +65,33 @@ def copy_onc_hidden(input_sequence, frequency=1):
     representation.append((SegmentH(nsyllables,1,'$','$')))
     return Sequence(tuple(representation),frequency)
 
+
+# helper functions for output modes
+def remove_pointers(segments):
+    return([re.sub(u"^[><].+$",u"",segment) for segment in segments])
+
+def join_segments(segments, jchar=u''):
+    return(jchar.join(segments))
+
+def syllabify(segments):
+    return([u''.join(segments[i:i+3]) for i in range(0,len(segments),3)])
+
+def extract_segments(sequence):
+    return([segment.letters for segment in sequence[1:-1]])
+
 # output modes
+
 def output_pass(sequence):
-    return sequence[1::-1]
+    return(extract_segments(sequence))
 
 def output_plain(sequence):
-    return u''.join([segment.letters for segment in sequence[1:-1]])
+    return u"".join(remove_pointers(extract_segments(sequence)))
 
 def output_syllabic(sequence):
-    return '-'.join(u''.join(segment.letters for segment in sequence[i-3:i]) for i in range(4,len(sequence),3))
-    
+    return(u"-".join(syllabify(remove_pointers(extract_segments(sequence)))))
+
 def output_segmental(sequence):
-    return u':'.join([segment.letters for segment in sequence[1:-1]])
-
-def output_plain_spe(sequence):
-    return u''.join([segment.letters for segment in sequence[1:-1]])
-
-def output_syllabic_spe(sequence):
-    # adjust for start-peak-end alignment here
-    return '-'.join(u''.join(segment.letters for segment in sequence[i-3:i]) for i in range(4,len(sequence),3))
-    
-def output_segmental_spe(sequence):
-    return u':'.join([segment.letters for segment in sequence[1:-1]])
-
+    return(u":".join(extract_segments(sequence)))
 
 # statistics
 def statistic_overlap(generator, generated_sequence):

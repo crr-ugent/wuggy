@@ -50,7 +50,7 @@ plugins=['__init__.py', 'base_plugin.py', 'orthographic_basque.py', 'orthographi
 
 plugins_paths=['plugins/'+ plugin for plugin in plugins]
 
-orth_plugins=['__init__.py', 'de.py', 'en.py', 'es.py', 'fr.py', 'it.py', 'nl.py', 'pl.py', 'sr_cyrillic.py', 'sr_latin.py', 'tr.py' 'vi.py']
+orth_plugins=['__init__.py', 'de.py', 'en.py', 'es.py', 'fr.py', 'it.py', 'nl.py', 'pl.py', 'sr_cyrillic.py', 'sr_latin.py', 'tr.py', 'vi.py']
 
 orth_plugins_paths=['plugins/orth/'+ orth_plugin for orth_plugin in orth_plugins]
 

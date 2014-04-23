@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from collections import *
 
 class Error(Exception):
@@ -9,7 +11,7 @@ class SegmentationError(Error):
     pass        
 
 
-def onsetnucleuscoda(orthographic_syllable, lang=None):
+def onset_nucleus_coda(orthographic_syllable, lang=None):
     oncpattern=lang.oncpattern
     m=oncpattern.match(orthographic_syllable)
     try:
@@ -17,14 +19,15 @@ def onsetnucleuscoda(orthographic_syllable, lang=None):
     except AttributeError:
         raise SegmentationError('Input syllable could not be segmented')
 
-def startpeakend(orthographic_syllable, lang=None):
+def start_peak_end(orthographic_syllable, lang=None):
     oncpattern=lang.oncpattern
     m=oncpattern.match(orthographic_syllable)
     try:
         onset, nucleus, coda=m.group(1), m.group(2), m.group(3)
     except AttributeError:
         raise SegmentationError('Input syllable could not be segmented')
-    start=onset if onset!=u"" else nucleus
-    coda=coda if coda!=u"" else nucleus
-    return [onset, nucleus, coda]
+    peak=nucleus
+    start=onset if onset!=u"" else u'>'+peak
+    end=coda if coda!=u"" else u'<'+peak
+    return [start, peak, end]
 

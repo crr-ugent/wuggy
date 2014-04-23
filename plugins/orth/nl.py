@@ -1,9 +1,9 @@
 #encoding:utf-8
 import re
 
-double_letters=['aa', 'au', 'ee', 'ie', 'oo', 'oe', 'ui', 'ij', 'ei', 'eu', 'ea', 'ae', 'ey', 'oa','ua']
+double_letters=['aa', 'au', 'ee', 'ie', 'oo', 'oe', 'ui', 'ij', 'ei', 'eu', 'ea', 'ae', 'ey', 'oa','ua', 'ou']
 single_letters=['a', 'e', 'i', 'o', 'u', 'y']
-accented_letters=[u'à', u'ê', u'è', u'é', u'â', u'ô', u'ü', u'ö']
+accented_letters=[u'à', u'ê', u'è', u'é', u'â', u'ô', u'ü', u'ö', u'ë']
 double_letter_pattern='|'.join(double_letters)
 single_letter_pattern='|'.join(single_letters)
 accented_letter_pattern='|'.join(accented_letters)

@@ -189,11 +189,11 @@ class Generator(object):
         self.sequence_cache=[]
     
     def list_output_modes(self):
-        names=[name for name in dir(self.plugin_module) if name.startswith('output')]
-        return [name.replace('output_','') for name in names]
+        names=[name for name in dir(self.plugin_module) if name.startswith(u'output')]
+        return [name.replace(u'output_',u'') for name in names]
     
     def set_output_mode(self, name):
-        self.output_mode=eval("self.plugin_module.output_%s" % (name))
+        self.output_mode=eval(u"self.plugin_module.output_%s" % (name))
     
     def set_attribute_filter(self, name, reference_sequence=None):
         if reference_sequence==None:
