@@ -1,8 +1,10 @@
 import sys
 import time
 import re
-from fractions import Fraction
 import os
+import operator
+from fractions import Fraction
+
 import wx
 
 import sequencegenerator.generator
@@ -13,12 +15,10 @@ if config.cl_plugin_path!=None:   # a command line argument was given
 elif sys.platform.startswith("win"):
     sys.path.append(os.curdir)
 elif sys.platform=="darwin":
-    # sys.path.append('/Library/Application Support/Wuggy/')
     sys.path.append(os.curdir)
 
 import plugins
 
-# Make a dictionary of available plugins
 
 class Generator(sequencegenerator.generator.Generator):
     def __init__(self):
@@ -28,7 +28,6 @@ class Generator(sequencegenerator.generator.Generator):
         elif sys.platform.startswith('win'):
             self.data_path='data'
         elif sys.platform=="darwin":
-            # self.data_path='/Library/Application Support/Wuggy/data'
             self.data_path='data'
         else:
             self.data_path='data'
@@ -117,10 +116,14 @@ class Generator(sequencegenerator.generator.Generator):
                 # initially, match is True (since all conditions have 
                 # to be fulfilled we can reject on one False)
                 match=True 
-                if (options['overlapping_segments']==True and
-                    self.statistics['overlap_ratio']!=Fraction(int(options['overlap_numerator']), 
-                    int(options['overlap_denominator']))):
-                    match=False
+                # add code for less or more overlapping segments using options['overlapping_segments_comparison']
+                if options['overlapping_segments']==True:
+                    observed_fraction=self.statistics['overlap_ratio']
+                    requested_fraction=Fraction(int(options['overlap_numerator']), int(options['overlap_denominator']))
+                    string2operator={'Exactly': operator.eq, 'Maximum': operator.le, 'Minimum': operator.ge}
+                    requested_operation=string2operator[options['overlapping_segments_comparison']]
+                    if not requested_operation(observed_fraction, requested_fraction):
+                        match=False                
                 if (options['match_segment_length']==False and 
                     options['match_plain_length']==True and
                     self.difference_statistics['plain_length']!=0):
